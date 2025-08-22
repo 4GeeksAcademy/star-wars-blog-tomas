@@ -19,6 +19,15 @@ const LearnMorePeople = () => {
           `https://www.swapi.tech/api/${tipo}/${id}`
         );
 
+         if (!response.ok) {
+          if (response.status === 429) {
+            setDatos({ name: "Demasiadas solicitudes, espera un momento..." });
+          } else {
+            setDatos({ name: `Error ${response.status}` });
+          }
+          return; // salimos antes de intentar parsear
+        }
+        
         if (response.ok) {
           const data = await response.json();
           if (data.result) {
@@ -34,7 +43,12 @@ const LearnMorePeople = () => {
       }
     };
 
-    fetchData(); // se ejecuta automáticamente al entrar a la página
+    const timeout = setTimeout(() => {
+      fetchData();
+    }, 500);
+
+    return () => clearTimeout(timeout);
+
   }, [tipo, id]); // se vuelve a ejecutar si cambia el tipo o id
 
   return (

@@ -14,6 +14,15 @@ import { useEffect, useState } from "react";
         const response = await fetch(`https://www.swapi.tech/api/${tipo}/${id}`);
         const data = await response.json();
 
+         if (!response.ok) {
+          if (response.status === 429) {
+            setDatos({ name: "Demasiadas solicitudes, espera un momento..." });
+          } else {
+            setDatos({ name: `Error ${response.status}` });
+          }
+          return; // salimos antes de intentar parsear
+        }
+        
         if (data.result) {
           setDatos(data.result.properties);
         } else {
@@ -25,7 +34,11 @@ import { useEffect, useState } from "react";
       }
     };
 
-    fetchData(); // se ejecuta automáticamente al entrar a la página
+     const timeout = setTimeout(() => {
+      fetchData();
+    }, 500);
+
+    return () => clearTimeout(timeout);
   }, [tipo, id]); // se vuelve a ejecutar si cambia el tipo o id
 
   return (
