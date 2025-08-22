@@ -29,34 +29,42 @@ import { useEffect, useState } from "react";
   }, [tipo, id]); // se vuelve a ejecutar si cambia el tipo o id
 
   return (
-    <div className="container mt-5">
+      <div className="container mt-5 mb-5">
       <div className="d-flex gap-5 flex-column">
         <div className="container d-flex flex-row gap-5">
           <img src={imagenUrl} alt="imagen aleatoria" />
           <div className="container ">
-            <h3 className="d-flex">{datos.name}</h3>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat, architecto in? Excepturi fugiat, assumenda,
-              laboriosam atque fuga architecto est omnis illum voluptas amet ratione ab dolore labore sed, facilis tempora?
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda molestias recusandae quos, eius ab quidem voluptate tenetur reiciendis,
-              error, ex veniam? Culpa ducimus dignissimos ea dolorem dicta consequatur alias voluptatem.Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat, architecto in? Excepturi fugiat, assumenda,
-              laboriosam atque fuga architecto est omnis illum voluptas amet ratione ab dolore labore sed, facilis tempora?
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda molestias recusandae quos, eius ab quidem voluptate tenetur reiciendis,
-              error, ex veniam? Culpa ducimus dignissimos ea dolorem dicta consequatur alias voluptatem.</p>
+            <h3 className="d-flex">{datos?.name}</h3>
+            <p>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat,
+              architecto in? Excepturi fugiat, assumenda, laboriosam atque fuga
+              architecto est omnis illum voluptas amet ratione ab dolore labore
+              sed, facilis tempora?
+            </p>
           </div>
         </div>
         <hr className="text-danger" />
         <div>
           {datos ? (
-            <div>
-              <ul className="d-flex justify-content-center flex-row gap-4 list-unstyled text-danger">
-                {Object.entries(datos)
-                  .filter(([key]) => key !== "name")
-                  .map(([key, value]) => (
-                    <li key={key}>
-                      <strong>{key.replaceAll("_", " ")}:</strong> {value}
-                    </li>
-                  ))}
-              </ul>
+            <div className="d-flex justify-content-center">
+              <div
+                className="d-grid text-center w-100"
+                style={{ gridTemplateColumns: "repeat(6, 1fr)", gap: "20px" }}
+              >
+                {/* Fila de títulos */}
+                {["Name", "Climate", "Population", "Orbital-Period", "Rotation-Period", "Diameter"].map((prop) => (
+                  <div key={prop} className="fw-bold text-danger">
+                    {prop.replaceAll("_", " ")}
+                  </div>
+                ))}
+
+                {/* Fila de valores */}
+                {["name", "climate", "population", "orbital_period", "rotation-period", "diameter"].map((prop) => (
+                  <div className="text-danger" key={prop}>
+                    {datos?.[prop] || "N/A"}
+                  </div>
+                ))}
+              </div>
             </div>
           ) : (
             <p>Cargando información...</p>

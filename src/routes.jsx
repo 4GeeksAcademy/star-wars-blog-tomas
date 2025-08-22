@@ -10,6 +10,8 @@ import { Single } from "./pages/Single";
 import { Demo } from "./pages/Demo";
 import {LearnMore} from "./pages/LearnMore"
 import LearnMorePlanets from "./pages/LearnMorePLanets";
+import LearnMorePeople from "./pages/LearnMorePeople";
+import LearnMoreVehicles from "./pages/LearnMoreVehicles";
 
 export const router = createBrowserRouter(
     createRoutesFromElements(
@@ -21,9 +23,7 @@ export const router = createBrowserRouter(
         <Route path= "/" element={<Home />} />
         <Route path="/single/:theId" element={ <Single />} />  
         <Route path="/demo" element={<Demo />} />
-        <Route path="/a" element={<Lear />} />
-        <Route path="/b" element={<LearnMorePlanets />} />
-        <Route path="/c" element={<Lea />} />
+        <Route path="/a" element={<LearnMorePeople />} />
         <Route path="/learn-more/:tipo/:id" element={<LearnMore />} />
       </Route>
     )
