@@ -1,4 +1,5 @@
-export const Card = ({ name, gender, hairColor, eyeColor }) => (
+import { Link } from "react-router-dom";
+export const Card = ({uid, name, gender, hairColor, eyeColor }) => (
 
     <div className="card mt-5" style={{ width: "18rem", minWidth: "18rem" }}>
         <img
@@ -11,7 +12,9 @@ export const Card = ({ name, gender, hairColor, eyeColor }) => (
             <p className="mb-0">Hair: {hairColor}</p>
             <p className="mb-0">Eyes: {eyeColor}</p>
             <div className="d-flex flex-row">
-                <button className="btn btn-primary mt-5">Learn More!</button>
+                <Link to={`/learn-more/people/${uid}`}>
+                <button className="btn btn-primary mt-5" >Learn More!</button>
+                </Link>
                 <button className="btn btn-warning mt-5 ms-auto">♡</button>
             </div>
         </div>
